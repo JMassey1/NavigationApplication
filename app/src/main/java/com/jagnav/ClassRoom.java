@@ -1,19 +1,20 @@
 package com.jagnav;
 
 public class ClassRoom extends Room {
-    int roomNum;
+    String roomNum;
     String teacher;
-    public ClassRoom(int rn, String t)
+    public ClassRoom(String rn, String t, int f)
     {
         roomNum = rn;
         teacher = t;
+        floor = f;
     }
 
-    public int getRoomNum() {
+    public String getRoomNum() {
         return roomNum;
     }
 
-    public void setRoomNum(int roomNum) {
+    public void setRoomNum(String roomNum) {
         this.roomNum = roomNum;
     }
 
