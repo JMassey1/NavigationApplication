@@ -23,6 +23,8 @@ import android.view.Menu;
 
 import com.jagnav.Map;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         Map test = new Map();
+        try {test.csvRead(); } catch (IOException e) {}
+        test.printMap();
     }
 
     @Override
