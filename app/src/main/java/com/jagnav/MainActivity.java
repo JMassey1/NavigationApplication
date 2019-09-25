@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         Map test = new Map();
-        try {test.csvRead(); } catch (IOException e) {}
+        test.csvRead();
         test.printMap();
     }
 
