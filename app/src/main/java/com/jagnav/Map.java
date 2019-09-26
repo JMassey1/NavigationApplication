@@ -1,6 +1,6 @@
 package com.jagnav;
 
-import com.opencsv.*;
+import org.apache.commons.csv.*;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -37,10 +37,11 @@ public class Map {
 
     public void csvRead() {
         try {
-            CSVReader reader = new CSVReader(new BufferedReader(new FileReader("JagNavMap.csv")));
-            schoolMap = reader.readAll();
-            System.out.println(schoolMap);
-            System.out.println(new File("JagNavMap.csv"));
+            CSVParser parser = CSVParser.parse((new FileReader("JagNavMap.csv")), CSVFormat.DEFAULT);
+            for (CSVRecord record : parser)
+            {
+                System.out.println(record);
+            }
         }
         catch (FileNotFoundException e) {
                 System.out.println("FILENOTFOUND");
@@ -51,14 +52,5 @@ public class Map {
 
         System.out.println("THIS METHOD ACTUALLY WORKS");
 
-    }
-
-    public void printMap() {
-        /*for (String[] x: schoolMap){
-            for (String y: x){
-                System.out.println(y);
-            }
-        }*/
-        System.out.println(schoolMap == null);
     }
 }
