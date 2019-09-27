@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Map test = new Map();
+        test.csvWrite();
         test.csvRead();
     }
 
