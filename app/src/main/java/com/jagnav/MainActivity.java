@@ -1,5 +1,6 @@
 package com.jagnav;
 
+import android.content.res.AssetManager;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -24,6 +25,9 @@ import android.view.Menu;
 import com.jagnav.Map;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,9 +61,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
+        AssetManager assetManager = getAssets();
         Map test = new Map();
         test.csvWrite();
-        test.csvRead();
+        test.csvRead(assetManager);
+        test.printMap();
+
     }
 
     @Override

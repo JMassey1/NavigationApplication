@@ -1,13 +1,11 @@
 package com.jagnav;
 
+import android.content.res.AssetManager;
+
 import org.apache.commons.csv.*;
 import java.io.*;
-import java.nio.*;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Map {
 
@@ -21,43 +19,33 @@ public class Map {
         System.out.println("Kylie is dumb");
     }
 
-
-    /*
-    public List<String[]> csvRead() throws IOException{
-        List<String[]> list = new ArrayList<>();
-        Reader reader1 = new FileReader("file.csv");
-        CSVReader csvRead = new CSVReader(reader1);
-        String[] line;
-        while ((line = csvRead.readNext()) != null) {
-            list.add(line);
-        }
-        reader1.close();
-        csvRead.close();
-        return list;
-
-    }
-    */
-
-    public void csvRead() {
+    public void csvRead(AssetManager assetManager) {
         try {
-            CSVParser parser = CSVParser.parse((new FileReader("")), CSVFormat.DEFAULT);
-            for (CSVRecord record : parser)
-            {
-                System.out.println(record);
+            InputStream inputStream = assetManager.open("JagNavMap.csv", AssetManager.ACCESS_BUFFER);
+            System.out.println("inputStream");
+            Scanner scanner = new Scanner (new InputStreamReader(inputStream));
+            int counter = 0;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                System.out.println(counter++);
+                String[] lineString = line.split(",");
+                schoolMap.add(lineString);
+//                for (String x: line.split(",")){
+//                    System.out.println(x);
+//                }
+
             }
         }
-        catch (FileNotFoundException e) {
-                System.out.println("FILENOTFOUND");
-        }
-        catch (IOException e){
-                System.out.println("IOEXCEPTION");
-        }
 
-        System.out.println("THIS METHOD ACTUALLY WORKS");
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    public void csvRead(String x) {
-        CSVParser parser = CSVParser.parse(Paths.get("/Users/jagstudent/Documents/GitHub/NavigationApplication/app/src/main/java/com/jagnav/JagNavMap.csv"))
+    public void printMap() {
+        for (String[] x: schoolMap){
+            System.out.println(x);
+        }
     }
 }
