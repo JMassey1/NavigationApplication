@@ -4,12 +4,13 @@ import android.content.res.AssetManager;
 
 import org.apache.commons.csv.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Map {
 
-    List<String[]> schoolMap;
+    List<String[]> schoolMap = new ArrayList<>();
 
     public Map() {
 
@@ -22,17 +23,11 @@ public class Map {
     public void csvRead(AssetManager assetManager) {
         try {
             InputStream inputStream = assetManager.open("JagNavMap.csv", AssetManager.ACCESS_BUFFER);
-            System.out.println("inputStream");
             Scanner scanner = new Scanner (new InputStreamReader(inputStream));
-            int counter = 0;
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                System.out.println(counter++);
-                String[] lineString = line.split(",");
-                schoolMap.add(lineString);
-//                for (String x: line.split(",")){
-//                    System.out.println(x);
-//                }
+                schoolMap.add(line.split(","));
+
 
             }
         }
@@ -44,8 +39,12 @@ public class Map {
     }
 
     public void printMap() {
-        for (String[] x: schoolMap){
-            System.out.println(x);
+        for (String[] array : schoolMap) {
+            for (String s : array) {
+                String line = (s + ",").trim();
+                System.out.print(line);
+            }
+            System.out.println();
         }
     }
 }

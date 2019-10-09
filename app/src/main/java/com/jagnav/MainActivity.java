@@ -27,6 +27,8 @@ import com.jagnav.Map;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
@@ -66,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         test.csvWrite();
         test.csvRead(assetManager);
         test.printMap();
+        test.printMap2();
+
 
     }
 
