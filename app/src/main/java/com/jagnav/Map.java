@@ -22,7 +22,7 @@ public class Map {
 
     public void csvRead(AssetManager assetManager) {
         try {
-            InputStream inputStream = assetManager.open("JagNavMap.csv", AssetManager.ACCESS_BUFFER);
+            InputStream inputStream = assetManager.open("TestDATA.csv", AssetManager.ACCESS_BUFFER);
             Scanner scanner = new Scanner (new InputStreamReader(inputStream));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -46,5 +46,9 @@ public class Map {
             }
             System.out.println();
         }
+    }
+
+    public void populateMap(){
+        for (String[])
     }
 }

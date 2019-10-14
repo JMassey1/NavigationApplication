@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         test.csvWrite();
         test.csvRead(assetManager);
         test.printMap();
-        test.printMap2();
 
 
     }
