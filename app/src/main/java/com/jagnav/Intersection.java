@@ -1,10 +1,9 @@
 package com.jagnav;
 
-public class Intersection extends Room {
+public class Intersection extends Location {
     int[] nearbyStairs;
-    public Intersection(int[] ns, int f)
+    public Intersection(int f)
     {
-        nearbyStairs = ns;
         floor = f;
     }
 }

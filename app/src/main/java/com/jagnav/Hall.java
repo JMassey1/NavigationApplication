@@ -1,10 +1,9 @@
 package com.jagnav;
 
-public class Hall extends Room {
+public class Hall extends Location {
     int[] nearbyRooms;
-    public Hall(int[] nr, int f)
+    public Hall(int f)
     {
-        int[] nearbyRooms = nr;
         floor = f;
     }
 }

@@ -1,6 +1,6 @@
 package com.jagnav;
 
-public class ClassRoom extends Room {
+public class ClassRoom extends Location {
     String roomNum;
     String teacher;
     public ClassRoom(String rn, String t, int f)

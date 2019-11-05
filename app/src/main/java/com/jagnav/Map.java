@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Map {
 
     List<String[]> schoolMap = new ArrayList<>();
+    List<Location> schoolMap2 = new ArrayList<>();
 
     public Map() {
 
@@ -49,6 +50,19 @@ public class Map {
     }
 
     public void populateMap(){
-        for (String[])
+        for (String[] cell: schoolMap){
+            if (cell[3].matches("[0-9]")){
+                schoolMap2.add(new ClassRoom(cell[3],cell[4],1));
+            }
+            else if(cell[3].contains("Library")){
+
+            }
+            else if(cell[3].contains("Intersection")){
+                schoolMap2.add(new Intersection(1));
+            }
+            else if(cell[3].contains("Hall")){
+                schoolMap2.add(new Hall(1));
+            }
+        }
     }
 }

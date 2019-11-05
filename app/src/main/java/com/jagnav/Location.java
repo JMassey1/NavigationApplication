@@ -1,4 +1,13 @@
 package com.jagnav;
 
-public class Location extends Room {
+public class Location {
+    int floor;
+
+    public int getFloor() {
+        return floor;
+    }
+
+    public void setFloor(int floor) {
+        this.floor = floor;
+    }
 }
