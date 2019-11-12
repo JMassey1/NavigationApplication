@@ -13,4 +13,8 @@ public class Stairs extends Location {
         connectedFloors = nr;
         direction = d;
     }
+
+    public String toString(){
+        return "S";
+    }
 }

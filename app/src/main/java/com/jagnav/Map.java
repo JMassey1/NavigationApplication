@@ -4,14 +4,16 @@ import android.content.res.AssetManager;
 
 import org.apache.commons.csv.*;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Map {
 
     List<String[]> schoolMap = new ArrayList<>();
-    List<Location> schoolMap2 = new ArrayList<>();
+    List<ArrayList<Location>> schoolMap2 = new ArrayList<ArrayList<Location>>();
 
     public Map() {
 
@@ -23,20 +25,17 @@ public class Map {
 
     public void csvRead(AssetManager assetManager) {
         try {
-            InputStream inputStream = assetManager.open("TestDATA.csv", AssetManager.ACCESS_BUFFER);
-            Scanner scanner = new Scanner (new InputStreamReader(inputStream));
+            InputStream inputStream = assetManager.open("JagNavMap.csv", AssetManager.ACCESS_BUFFER);
+            Scanner scanner = new Scanner(new InputStreamReader(inputStream));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 schoolMap.add(line.split(","));
 
 
             }
-        }
-
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void printMap() {
@@ -50,19 +49,27 @@ public class Map {
     }
 
     public void populateMap(){
-        for (String[] cell: schoolMap){
-            if (cell[3].matches("[0-9]")){
-                schoolMap2.add(new ClassRoom(cell[3],cell[4],1));
-            }
-            else if(cell[3].contains("Library")){
 
+        System.out.println(schoolMap.get(schoolMap.size() - 1));
+
+        for (String[] cell: schoolMap) {
+            ArrayList<Location> newRow = new ArrayList<>();
+
+            if (cell[3].matches("[0-9]")) {
+                newRow.add(new ClassRoom(cell[3], cell[4], 1));
+            } else if (cell[3].contains("Library")) {
+                newRow.add(new Location());
+            } else if (cell[3].contains("Intersection")) {
+                newRow.add(new Intersection(1));
+            } else if (cell[3].contains("Hall")) {
+                newRow.add(new Hall(1));
+            } else if (cell[3].contains("null")) {
+                newRow.add(new Location());
             }
-            else if(cell[3].contains("Intersection")){
-                schoolMap2.add(new Intersection(1));
-            }
-            else if(cell[3].contains("Hall")){
-                schoolMap2.add(new Hall(1));
-            }
+
+            schoolMap2.add(newRow);
         }
     }
+
+
 }

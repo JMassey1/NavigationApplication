@@ -6,4 +6,8 @@ public class Intersection extends Location {
     {
         floor = f;
     }
+
+    public String toString() {
+        return "I";
+    }
 }

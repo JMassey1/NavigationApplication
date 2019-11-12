@@ -25,4 +25,8 @@ public class ClassRoom extends Location {
     public void setTeacher(String teacher) {
         this.teacher = teacher;
     }
+
+    public String toString() {
+        return "C";
+    }
 }

@@ -6,4 +6,8 @@ public class Hall extends Location {
     {
         floor = f;
     }
+
+    public String toString(){
+        return "H";
+    }
 }
