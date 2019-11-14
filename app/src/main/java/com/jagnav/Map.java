@@ -39,10 +39,9 @@ public class Map {
     }
 
     public void printMap() {
-        for (String[] array : schoolMap) {
-            for (String s : array) {
-                String line = (s + ",").trim();
-                System.out.print(line);
+        for (List<Location> col : schoolMap2) {
+            for (Location loc: col) {
+                System.out.print(loc);
             }
             System.out.println();
         }
@@ -50,25 +49,30 @@ public class Map {
 
     public void populateMap(){
 
-        System.out.println(schoolMap.get(schoolMap.size() - 1));
+        //System.out.println(schoolMap.get(schoolMap.size() - 1));
 
-        for (String[] cell: schoolMap) {
-            ArrayList<Location> newRow = new ArrayList<>();
+        for (int x = 0; x < Integer.parseInt(schoolMap.get(schoolMap.size() - 1)[0]); x++) {
 
-            if (cell[3].matches("[0-9]")) {
-                newRow.add(new ClassRoom(cell[3], cell[4], 1));
-            } else if (cell[3].contains("Library")) {
-                newRow.add(new Location());
-            } else if (cell[3].contains("Intersection")) {
-                newRow.add(new Intersection(1));
-            } else if (cell[3].contains("Hall")) {
-                newRow.add(new Hall(1));
-            } else if (cell[3].contains("null")) {
-                newRow.add(new Location());
+            for (String[] cell: schoolMap) {
+
+
+                if (cell[3].matches("[0-9]")) {
+                    newRow.add(new ClassRoom(cell[3], cell[4], 1));
+                } else if (cell[3].contains("Library")) {
+                    newRow.add(new Location());
+                } else if (cell[3].contains("Intersection")) {
+                    newRow.add(new Intersection(1));
+                } else if (cell[3].contains("Hall")) {
+                    newRow.add(new Hall(1));
+                } else if (cell[3].contains("null")) {
+                    newRow.add(new Location());
+                }
+
+                schoolMap2.add(newRow);
             }
-
-            schoolMap2.add(newRow);
         }
+
+
     }
 
 
