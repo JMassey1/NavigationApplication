@@ -39,8 +39,8 @@ public class Map {
     }
 
     public void printMap() {
-        for (List<Location> col : schoolMap2) {
-            for (Location loc: col) {
+        for (List<Location> row : schoolMap2) {
+            for (Location loc: row) {
                 System.out.print(loc);
             }
             System.out.println();
@@ -50,26 +50,38 @@ public class Map {
     public void populateMap(){
 
         //System.out.println(schoolMap.get(schoolMap.size() - 1));
-
+        for (String i: schoolMap.get(0))
+        {
+            System.out.println(i);
+        }
         for (int x = 0; x < Integer.parseInt(schoolMap.get(schoolMap.size() - 1)[0]); x++) {
-
+            ArrayList<Location> newRow = new ArrayList<>();
             for (String[] cell: schoolMap) {
 
+                if (cell[1].matches(Integer.toString(x))) {
 
-                if (cell[3].matches("[0-9]")) {
-                    newRow.add(new ClassRoom(cell[3], cell[4], 1));
-                } else if (cell[3].contains("Library")) {
-                    newRow.add(new Location());
-                } else if (cell[3].contains("Intersection")) {
-                    newRow.add(new Intersection(1));
-                } else if (cell[3].contains("Hall")) {
-                    newRow.add(new Hall(1));
-                } else if (cell[3].contains("null")) {
-                    newRow.add(new Location());
+                    try {
+                        if (Integer.parseInt(cell[3]) > 0 | cell[3].contains("/")) {
+                            newRow.add(new ClassRoom(cell[3], cell[4], 1));
+                        }
+                    } catch (NumberFormatException e) {
+                        if (cell[3].contains("null")) {
+                            newRow.add(new Location());
+                        } else if (cell[3].contains("Stairs")) {
+
+                        } else if (cell[3].contains("Intersection")) {
+                            newRow.add(new Intersection(1));
+                        } else if (cell[3].contains("Hall")) {
+                            newRow.add(new Hall(1));
+                        } else {
+                            newRow.add(new Location());
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e1) {
+                        newRow.add(new ClassRoom(cell[3], "N/A", 1));
+                    }
                 }
-
-                schoolMap2.add(newRow);
             }
+            schoolMap2.add(newRow);
         }
 
 

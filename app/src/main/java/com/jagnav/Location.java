@@ -12,6 +12,6 @@ public class Location {
     }
 
     public String toString() {
-        return "L";
+        return " ";
     }
 }
