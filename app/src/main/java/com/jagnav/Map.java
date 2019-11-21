@@ -49,9 +49,7 @@ public class Map {
 
     public void populateMap(){
 
-        //System.out.println(schoolMap.get(schoolMap.size() - 1));
-        for (String i: schoolMap.get(0))
-        {
+        for (String i: schoolMap.get(0)) {
             System.out.println(i);
         }
         for (int x = 0; x < Integer.parseInt(schoolMap.get(schoolMap.size() - 1)[0]); x++) {
@@ -62,19 +60,26 @@ public class Map {
 
                     try {
                         if (Integer.parseInt(cell[3]) > 0 | cell[3].contains("/")) {
-                            newRow.add(new ClassRoom(cell[3], cell[4], 1));
+                            newRow.add(new ClassRoom(Integer.parseInt(cell[3]), cell[4], Integer.parseInt(cell[2])));
                         }
                     } catch (NumberFormatException e) {
                         if (cell[3].contains("null")) {
                             newRow.add(new Location());
                         } else if (cell[3].contains("Stairs")) {
-
+                            newRow.add(new Stairs());
                         } else if (cell[3].contains("Intersection")) {
                             newRow.add(new Intersection(1));
                         } else if (cell[3].contains("Hall")) {
                             newRow.add(new Hall(1));
+                        } else if (cell[3].contains("Exit")) {
+                            newRow.add(new Exit());
                         } else {
-                            newRow.add(new Location());
+
+                            try {
+                                newRow.add(new ClassRoom(cell[3], cell[4], Integer.parseInt(cell[2])));
+                            } catch (java.lang.ArrayIndexOutOfBoundsException a) {
+                                newRow.add(new ClassRoom(cell[3], Integer.parseInt(cell[2])));
+                            }
                         }
                     } catch (ArrayIndexOutOfBoundsException e1) {
                         newRow.add(new ClassRoom(cell[3], "N/A", 1));

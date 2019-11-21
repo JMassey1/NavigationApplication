@@ -1,12 +1,23 @@
 package com.jagnav;
 
 public class ClassRoom extends Location {
-    String roomNum;
-    String teacher;
-    public ClassRoom(String rn, String t, int f)
+    String roomNum,teacher,name;
+    int floor;
+    public ClassRoom(int rn, String t, int f)
     {
-        roomNum = rn;
+        roomNum = Integer.toString(rn);
         teacher = t;
+        floor = f;
+    }
+
+    public ClassRoom(String name, String teacher, int f) {
+        name = this.name;
+        teacher = this.teacher;
+        floor = f;
+    }
+
+    public ClassRoom(String name, int f) {
+        name = this.name;
         floor = f;
     }
 

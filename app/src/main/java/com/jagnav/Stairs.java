@@ -8,11 +8,11 @@ public class Stairs extends Location {
         connectedFloors = nr;
     }
 
-    public Stairs(int[] nr, String d)
-    {
-        connectedFloors = nr;
-        direction = d;
+    public Stairs() {
+
     }
+
+
 
     public String toString(){
         return "S";
