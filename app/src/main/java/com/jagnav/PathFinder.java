@@ -1,13 +1,19 @@
 package com.jagnav;
 import java.util.ArrayList;
 
-public abstract class PathFinder {
+public class PathFinder {
 
-    public static String[] findPath(ArrayList<ArrayList<Location>> map, Location start, Location end) {
+    ArrayList<ArrayList<Location>> map;
+
+    public PathFinder(ArrayList<ArrayList<Location>> map) {
+        map = this.map;
+    }
+
+    public String[] findPath(Location start, Location end) {
         return new String[]{"test","test","test"};
     }
 
-    public static int[] getCoordinates(ArrayList<ArrayList<Location>> map, Location loc) throws LocationNotFound{
+    public int[] getCoordinates(Location loc) throws LocationNotFound{
         for (int x = 0; x < map.size(); x++) {
             for (int y = 0; y < map.get(0).size(); y++) {
                 if (map.get(x).get(y).equals(loc)) {
@@ -18,19 +24,23 @@ public abstract class PathFinder {
         throw new LocationNotFound("getting coords failed");
     }
 
-    public static Object[] move(int[] initial, int[] movement, int count) {
+    //Idea is this method will return the number of times you can move in that direction (towards the endPos) until you encounter an unmoveable tile
+    public int move(int[] initial, int[] movement, int count) {
 
        // for (int x = initial[0]; x <)
 
 
 
 
-        return new Object[]{};
+        return 0;
     }
 
-    public static boolean canMove(int[] initialPos, int[] endPos) {
-
-        return true;
+    public boolean canMove(int[] endPos) {
+        Location nextLoc = map.get(endPos[0]).get(endPos[1]);
+        if (!(nextLoc instanceof VoidLocation)) {
+            return true;
+        }
+        return false;
     }
 
 

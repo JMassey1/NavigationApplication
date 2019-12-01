@@ -64,7 +64,7 @@ public class Map {
                         }
                     } catch (NumberFormatException e) {
                         if (cell[3].contains("null")) {
-                            newRow.add(new Location());
+                            newRow.add(new VoidLocation());
                         } else if (cell[3].contains("Stairs")) {
                             newRow.add(new Stairs());
                         } else if (cell[3].contains("Intersection")) {
