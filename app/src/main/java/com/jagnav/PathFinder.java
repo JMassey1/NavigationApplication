@@ -1,5 +1,7 @@
 package com.jagnav;
 import java.util.ArrayList;
+import java.lang.Math;
+import java.util.Arrays;
 
 public class PathFinder {
 
@@ -24,26 +26,39 @@ public class PathFinder {
         throw new LocationNotFound("getting coords failed");
     }
 
-    public int move(int[] initial, int[] movement, int count) {
+    public int move(int[] initial, int[] end) throws LocationNotFound{
+        int[] currentPos = initial;
+        while (!(Arrays.equals(currentPos,end))) {
 
-       // for (int x = initial[0]; x <)
+            Location upOne = map.get(currentPos[0]+1).get(currentPos[1]);
+            Location rightOne = map.get(currentPos[0]).get(currentPos[1]+1);
+            Location downOne = map.get(currentPos[0]-1).get(currentPos[1]);
+            Location leftOne = map.get(currentPos[0]).get(currentPos[1]-1);
+
+            assignHeuristic(upOne,end);
+            assignHeuristic(rightOne,end);
+            assignHeuristic(downOne,end);
+            assignHeuristic(leftOne,end);
 
 
 
 
+        }
         return 0;
     }
 
-    public void assignHeuristic(Location end) throws LocationNotFound {
-        int[] endPos = getCoordinates(end);
+    public void assignHeuristic(Location loc, int[] endPos) throws LocationNotFound {
 
-        for (int y = 0; y < map.size() - 1; y++) {
-            for (int x = 0; x < map.get(0).size() - 1; x++){
-                Location loc = map.get(y).get(x);
-                int[] currentPos = getCoordinates(loc);
-                loc.setHeurisitc(Math.abs(current))
-            }
+
+
+        if (!canMove(getCoordinates(loc))) {
+            // Integer.MAX_VALUE;
+        } else {
+            int[] currentPos = getCoordinates(loc);
+            loc.setHeuristic(Math.abs(currentPos[0] - endPos[0]) + Math.abs(currentPos[1] - endPos[1]));
         }
+
+
     }
 
     public boolean canMove(int[] endPos) {
