@@ -45,6 +45,11 @@ public class Map {
             }
             System.out.println();
         }
+        System.out.println("TEST");
+        for (Location loc: schoolMap2.get(0)) {
+            System.out.print(loc);
+        }
+        System.out.println();
     }
 
     public void populateMap(){

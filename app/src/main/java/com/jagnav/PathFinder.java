@@ -14,17 +14,16 @@ public class PathFinder {
     }
 
     public int[] getCoordinates(Location loc) throws LocationNotFound{
-        for (int x = 0; x < map.size(); x++) {
-            for (int y = 0; y < map.get(0).size(); y++) {
+        for (int y = 0; y < map.size(); y++) {
+            for (int x = 0; x < map.get(y).size(); x++) {
                 if (map.get(x).get(y).equals(loc)) {
-                    return new int[]{x,y};
+                    return new int[]{y,x};
                 }
             }
         }
         throw new LocationNotFound("getting coords failed");
     }
 
-    //Idea is this method will return the number of times you can move in that direction (towards the endPos) until you encounter an unmoveable tile
     public int move(int[] initial, int[] movement, int count) {
 
        // for (int x = initial[0]; x <)
@@ -33,6 +32,18 @@ public class PathFinder {
 
 
         return 0;
+    }
+
+    public void assignHeuristic(Location end) throws LocationNotFound {
+        int[] endPos = getCoordinates(end);
+
+        for (int y = 0; y < map.size() - 1; y++) {
+            for (int x = 0; x < map.get(0).size() - 1; x++){
+                Location loc = map.get(y).get(x);
+                int[] currentPos = getCoordinates(loc);
+                loc.setHeurisitc(Math.abs(current))
+            }
+        }
     }
 
     public boolean canMove(int[] endPos) {
