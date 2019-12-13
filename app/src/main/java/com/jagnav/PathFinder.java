@@ -8,7 +8,7 @@ public class PathFinder {
     ArrayList<ArrayList<Location>> map;
 
     public PathFinder(ArrayList<ArrayList<Location>> map) {
-        map = this.map;
+        this.map = map;
     }
 
     public String[] findPath(Location start, Location end) {
@@ -18,7 +18,7 @@ public class PathFinder {
     public int[] getCoordinates(Location loc) throws LocationNotFound{
         for (int y = 0; y < map.size(); y++) {
             for (int x = 0; x < map.get(y).size(); x++) {
-                if (map.get(x).get(y).equals(loc)) {
+                if (map.get(y).get(x).equals(loc)) {
                     return new int[]{y,x};
                 }
             }
@@ -40,6 +40,18 @@ public class PathFinder {
             assignHeuristic(downOne,end);
             assignHeuristic(leftOne,end);
 
+            Location temp = upOne;
+            if (rightOne.getHeuristic() < temp.getHeuristic()) {
+                temp = rightOne;
+            }
+            if (downOne.getHeuristic() < temp.getHeuristic()) {
+                temp = downOne;
+            }
+            if (leftOne.getHeuristic() < temp.getHeuristic()) {
+                temp = leftOne;
+            }
+
+            System.out.println(currentPos = getCoordinates(temp));
 
 
 

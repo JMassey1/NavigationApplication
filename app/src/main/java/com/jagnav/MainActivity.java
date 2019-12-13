@@ -23,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 
 import com.jagnav.Map;
+import com.jagnav.PathFinder;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,6 +70,18 @@ public class MainActivity extends AppCompatActivity {
         test.csvRead(assetManager);
         test.populateMap();
         test.printMap();
+
+        PathFinder pf = new PathFinder(test.getSchoolMap());
+        try {
+        int[] coords = (pf.getCoordinates(test.findLocation("930")));
+        for (int x: coords) {
+            System.out.println("{" + x + "}");
+        }
+        }
+        catch (Exception l) {
+            l.printStackTrace();
+        }
+
 
 
 

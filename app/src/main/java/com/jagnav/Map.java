@@ -2,9 +2,8 @@ package com.jagnav;
 
 import android.content.res.AssetManager;
 
-import org.apache.commons.csv.*;
+
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,10 +12,33 @@ import java.util.Scanner;
 public class Map {
 
     List<String[]> schoolMap = new ArrayList<>();
-    List<ArrayList<Location>> schoolMap2 = new ArrayList<ArrayList<Location>>();
+    ArrayList<ArrayList<Location>> schoolMap2 = new ArrayList<ArrayList<Location>>();
 
     public Map() {
 
+    }
+
+    public Location findLocation(String roomNum) {
+        for (int y = 0; y < schoolMap2.size(); y++) {
+            for (int x = 0; x < schoolMap2.get(y).size(); x++) {
+                try {
+                    ClassRoom temp = (ClassRoom) schoolMap2.get(y).get(x);
+                    System.out.println("!!!!" + temp.getRoomNum());
+                    if (temp instanceof ClassRoom && temp.getRoomNum() != null) {
+                        if ((temp).getRoomNum().equals(roomNum)) {
+                            return temp
+                        }
+                    }
+                } catch (ClassCastException c) {
+
+                }
+            }
+        }
+        return new Location();
+    }
+
+    public ArrayList<ArrayList<Location>> getSchoolMap() {
+        return schoolMap2;
     }
 
     public void csvWrite(){
@@ -66,6 +88,8 @@ public class Map {
                     try {
                         if (Integer.parseInt(cell[3]) > 0 | cell[3].contains("/")) {
                             newRow.add(new ClassRoom(Integer.parseInt(cell[3]), cell[4], Integer.parseInt(cell[2])));
+                        } else {
+
                         }
                     } catch (NumberFormatException e) {
                         if (cell[3].contains("null")) {
@@ -79,12 +103,7 @@ public class Map {
                         } else if (cell[3].contains("Exit")) {
                             newRow.add(new Exit());
                         } else {
-
-                            try {
-                                newRow.add(new ClassRoom(cell[3], cell[4], Integer.parseInt(cell[2])));
-                            } catch (java.lang.ArrayIndexOutOfBoundsException a) {
-                                newRow.add(new ClassRoom(cell[3], Integer.parseInt(cell[2])));
-                            }
+                                newRow.add(new ClassRoom(cell[3].toLowerCase(), Integer.parseInt(cell[2])));
                         }
                     } catch (ArrayIndexOutOfBoundsException e1) {
                         newRow.add(new ClassRoom(cell[3], "N/A", 1));

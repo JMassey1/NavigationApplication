@@ -11,13 +11,13 @@ public class ClassRoom extends Location {
     }
 
     public ClassRoom(String name, String teacher, int f) {
-        name = this.name;
-        teacher = this.teacher;
+        this.name = name;
+        this.teacher = teacher;
         floor = f;
     }
 
     public ClassRoom(String name, int f) {
-        name = this.name;
+        this.name = name;
         floor = f;
     }
 
