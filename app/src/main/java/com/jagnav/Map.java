@@ -26,7 +26,7 @@ public class Map {
                     System.out.println("!!!!" + temp.getRoomNum());
                     if (temp instanceof ClassRoom && temp.getRoomNum() != null) {
                         if ((temp).getRoomNum().equals(roomNum)) {
-                            return temp
+                            return temp;
                         }
                     }
                 } catch (ClassCastException c) {
