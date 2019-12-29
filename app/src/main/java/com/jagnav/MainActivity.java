@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         PathFinder pf = new PathFinder(test.getSchoolMap());
         try {
         int[] coords = (pf.getCoordinates(test.findLocation("930")));
+        System.out.println("Finding coordinates for room 930");
         for (int x: coords) {
             System.out.println("{" + x + "}");
         }

@@ -23,7 +23,7 @@ public class Map {
             for (int x = 0; x < schoolMap2.get(y).size(); x++) {
                 try {
                     ClassRoom temp = (ClassRoom) schoolMap2.get(y).get(x);
-                    System.out.println("!!!!" + temp.getRoomNum());
+                    //System.out.println("!!!!" + temp.getRoomNum());
                     if (temp instanceof ClassRoom && temp.getRoomNum() != null) {
                         if ((temp).getRoomNum().equals(roomNum)) {
                             return temp;
@@ -67,11 +67,11 @@ public class Map {
             }
             System.out.println();
         }
-        System.out.println("TEST");
-        for (Location loc: schoolMap2.get(0)) {
-            System.out.print(loc);
-        }
-        System.out.println();
+        //System.out.println("TEST");
+//        for (Location loc: schoolMap2.get(0)) {
+//            System.out.print(loc);
+//        }
+//        System.out.println();
     }
 
     public void populateMap(){
