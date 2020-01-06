@@ -26,19 +26,19 @@ public class PathFinder {
         throw new LocationNotFound("getting coords failed");
     }
 
-    public int move(int[] initial, int[] end) throws LocationNotFound{
+    public void move(int[] initial, int[] end) throws LocationNotFound{
         int[] currentPos = initial;
         while (!(Arrays.equals(currentPos,end))) {
 
-            Location upOne = map.get(currentPos[0]+1).get(currentPos[1]);
-            Location rightOne = map.get(currentPos[0]).get(currentPos[1]+1);
-            Location downOne = map.get(currentPos[0]-1).get(currentPos[1]);
-            Location leftOne = map.get(currentPos[0]).get(currentPos[1]-1);
+            Location upOne = map.get(currentPos[0] + 1).get(currentPos[1]);
+            Location rightOne = map.get(currentPos[0]).get(currentPos[1] + 1);
+            Location downOne = map.get(currentPos[0] - 1).get(currentPos[1]);
+            Location leftOne = map.get(currentPos[0]).get(currentPos[1] - 1);
 
-            assignHeuristic(upOne,end);
-            assignHeuristic(rightOne,end);
-            assignHeuristic(downOne,end);
-            assignHeuristic(leftOne,end);
+            assignHeuristic(upOne, end);
+            assignHeuristic(rightOne, end);
+            assignHeuristic(downOne, end);
+            assignHeuristic(leftOne, end);
 
             Location temp = upOne;
             if (rightOne.getHeuristic() < temp.getHeuristic()) {
@@ -51,12 +51,11 @@ public class PathFinder {
                 temp = leftOne;
             }
 
-            System.out.println(currentPos = getCoordinates(temp));
+            currentPos = getCoordinates(temp);
 
-
+            System.out.println(currentPos[0] + ", " + currentPos[1]);
 
         }
-        return 0;
     }
 
     public void assignHeuristic(Location loc, int[] endPos) throws LocationNotFound {
@@ -64,7 +63,7 @@ public class PathFinder {
 
 
         if (!canMove(getCoordinates(loc))) {
-            // Integer.MAX_VALUE;
+            loc.setHeuristic(Integer.MAX_VALUE);
         } else {
             int[] currentPos = getCoordinates(loc);
             loc.setHeuristic(Math.abs(currentPos[0] - endPos[0]) + Math.abs(currentPos[1] - endPos[1]));

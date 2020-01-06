@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         for (int x: coords) {
             System.out.println("{" + x + "}");
         }
+        int[] endCoords = {0,0};
+        pf.move(coords, endCoords);
         }
         catch (Exception l) {
             l.printStackTrace();
