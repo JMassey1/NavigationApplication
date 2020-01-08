@@ -73,12 +73,12 @@ public class MainActivity extends AppCompatActivity {
 
         PathFinder pf = new PathFinder(test.getSchoolMap());
         try {
-        int[] coords = (pf.getCoordinates(test.findLocation("930")));
-        System.out.println("Finding coordinates for room 930");
+        int[] coords = (pf.getCoordinates(test.findLocation("905")));
+        System.out.println("Finding coordinates for room 905");
         for (int x: coords) {
             System.out.println("{" + x + "}");
         }
-        int[] endCoords = {0,0};
+        int[] endCoords = {3, 5};
         pf.move(coords, endCoords);
         }
         catch (Exception l) {

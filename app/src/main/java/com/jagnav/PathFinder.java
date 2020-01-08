@@ -28,11 +28,11 @@ public class PathFinder {
 
     public void move(int[] initial, int[] end) throws LocationNotFound{
         int[] currentPos = initial;
-        while (!(Arrays.equals(currentPos,end))) {
+        while (!(Arrays.equals(currentPos, end))) {
 
-            Location upOne = map.get(currentPos[0] + 1).get(currentPos[1]);
+            Location upOne = map.get(currentPos[0] - 1).get(currentPos[1]);
             Location rightOne = map.get(currentPos[0]).get(currentPos[1] + 1);
-            Location downOne = map.get(currentPos[0] - 1).get(currentPos[1]);
+            Location downOne = map.get(currentPos[0] + 1).get(currentPos[1]);
             Location leftOne = map.get(currentPos[0]).get(currentPos[1] - 1);
 
             assignHeuristic(upOne, end);
@@ -40,22 +40,37 @@ public class PathFinder {
             assignHeuristic(downOne, end);
             assignHeuristic(leftOne, end);
 
-            Location temp = upOne;
-            if (rightOne.getHeuristic() < temp.getHeuristic()) {
-                temp = rightOne;
-            }
-            if (downOne.getHeuristic() < temp.getHeuristic()) {
-                temp = downOne;
-            }
-            if (leftOne.getHeuristic() < temp.getHeuristic()) {
+            Location temp = map.get(currentPos[0]).get(currentPos[1]);
+            if (Math.abs(currentPos[0] - end[0]) > Math.abs(currentPos[1] - end[1])) {
                 temp = leftOne;
+                if (rightOne.getHeuristic() < temp.getHeuristic()) {
+                    temp = rightOne;
+                }
+                if (downOne.getHeuristic() < temp.getHeuristic()) {
+                    temp = downOne;
+                }
+                if (upOne.getHeuristic() < temp.getHeuristic()) {
+                    temp = upOne;
+                }
+            }
+            else {
+                temp = upOne;
+                if (downOne.getHeuristic() < temp.getHeuristic()) {
+                    temp = downOne;
+                }
+                if (rightOne.getHeuristic() < temp.getHeuristic()) {
+                    temp = rightOne;
+                }
+                if (leftOne.getHeuristic() < temp.getHeuristic()) {
+                    temp = leftOne;
+                }
+
             }
 
             currentPos = getCoordinates(temp);
 
-            System.out.println(currentPos[0] + ", " + currentPos[1]);
 
-        }
+            System.out.println(currentPos[0] + ", " + currentPos[1]);        }
     }
 
     public void assignHeuristic(Location loc, int[] endPos) throws LocationNotFound {
