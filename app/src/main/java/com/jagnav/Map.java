@@ -34,7 +34,7 @@ public class Map {
                 }
             }
         }
-        return new Location();
+        return new VoidLocation();
     }
 
     public ArrayList<ArrayList<Location>> getSchoolMap() {
@@ -81,6 +81,8 @@ public class Map {
         }
         for (int x = 0; x < Integer.parseInt(schoolMap.get(schoolMap.size() - 1)[0]); x++) {
             ArrayList<Location> newRow = new ArrayList<>();
+            RowTest testNum = new RowTest(x);
+            newRow.add(testNum);
             for (String[] cell: schoolMap) {
 
                 if (cell[1].matches(Integer.toString(x))) {
@@ -96,14 +98,12 @@ public class Map {
                             newRow.add(new VoidLocation());
                         } else if (cell[3].contains("Stairs")) {
                             newRow.add(new Stairs());
-                        } else if (cell[3].contains("Intersection")) {
-                            newRow.add(new Intersection(1));
                         } else if (cell[3].contains("Hall")) {
                             newRow.add(new Hall(1));
                         } else if (cell[3].contains("Exit")) {
                             newRow.add(new Exit());
                         } else {
-                                newRow.add(new ClassRoom(cell[3].toLowerCase(), Integer.parseInt(cell[2])));
+                            newRow.add(new ClassRoom(cell[3].toLowerCase(), Integer.parseInt(cell[2])));
                         }
                     } catch (ArrayIndexOutOfBoundsException e1) {
                         newRow.add(new ClassRoom(cell[3], "N/A", 1));

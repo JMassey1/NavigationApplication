@@ -40,8 +40,8 @@ public class PathFinder {
             assignHeuristic(downOne, end);
             assignHeuristic(leftOne, end);
 
-            Location temp = map.get(currentPos[0]).get(currentPos[1]);
-            if (Math.abs(currentPos[0] - end[0]) > Math.abs(currentPos[1] - end[1])) {
+            Location temp;
+            if (Math.abs(currentPos[0] - end[0]) < Math.abs(currentPos[1] - end[1])) {
                 temp = leftOne;
                 if (rightOne.getHeuristic() < temp.getHeuristic()) {
                     temp = rightOne;
@@ -70,7 +70,9 @@ public class PathFinder {
             currentPos = getCoordinates(temp);
 
 
-            System.out.println(currentPos[0] + ", " + currentPos[1]);        }
+            System.out.println(currentPos[0] + ", " + currentPos[1]);
+            System.out.println(temp.getHeuristic());
+        }
     }
 
     public void assignHeuristic(Location loc, int[] endPos) throws LocationNotFound {

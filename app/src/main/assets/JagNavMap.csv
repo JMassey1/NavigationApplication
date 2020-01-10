@@ -1,4 +1,5 @@
-﻿0,0,1,null,
+﻿x,y,Floor,Room #,Teacher
+0,0,1,null,
 0,1,1,null,
 0,2,1,null,
 0,3,1,null,
@@ -120,18 +121,18 @@
 3,5,1,null,
 3,6,1,null,
 3,7,1,Library,Cole
-3,8,1,Intersection,
+3,8,1,Hall,
 3,9,1,001,Stotts
 3,10,1,Hall,
 3,11,1,002,Poertner
 3,12,1,Hall,
 3,13,1,003,Sundberg
-3,14,1,Intersection,
+3,14,1,Hall,
 3,15,1,Hall,
 3,16,1,004,Fanscher
 3,17,1,005,Grice/Phillips
 3,18,1,Hall,
-3,19,1,Intersection,
+3,19,1,Hall,
 3,20,1,006,Mooney
 3,21,1,Hall,
 3,22,1,007,Marshall
@@ -378,26 +379,26 @@
 9,35,1,null,
 9,36,1,null,
 9,37,1,null,
-10,0,1,Hall,
-10,1,1,Hall,
-10,2,1,Hall,
-10,3,1,Hall,
+10,0,1,null,
+10,1,1,null,
+10,2,1,null,
+10,3,1,null,
 10,4,1,Hall,
 10,5,1,Hall,
 10,6,1,Hall,
 10,7,1,Hall,
-10,8,1,Intersection,
+10,8,1,Hall,
 10,9,1,Hall,
 10,10,1,301,Martin
 10,11,1,Hall,
 10,12,1,303,Baker
 10,13,1,Hall,
-10,14,1,Intersection,
+10,14,1,Hall,
 10,15,1,Hall,
 10,16,1,Hall,
 10,17,1,309,Schmelzle
 10,18,1,Hall,
-10,19,1,Intersection,
+10,19,1,Hall,
 10,20,1,Hall,
 10,21,1,Hall,
 10,22,1,317,Sheridan
@@ -511,7 +512,7 @@
 13,16,1,null,
 13,17,1,null,
 13,18,1,null,
-13,19,1,Intersection,
+13,19,1,Hall,
 13,20,1,516,Ceule
 13,21,1,Hall,
 13,22,1,Hall,
@@ -1104,7 +1105,7 @@
 29,1,1,null,
 29,2,1,null,
 29,3,1,null,
-29,4,1,null,
+29,4,1,Hall,
 29,5,1,Hall,
 29,6,1,Hall,
 29,7,1,903,Haynes
@@ -1127,7 +1128,7 @@
 29,24,1,Hall,
 29,25,1,919,Foreign Lang Lab
 29,26,1,Hall,
-29,27,1,Intersection,
+29,27,1,Hall,
 29,28,1,921,Davis
 29,29,1,Hall,
 29,30,1,Hall,
@@ -1142,7 +1143,7 @@
 30,1,1,null,
 30,2,1,null,
 30,3,1,null,
-30,4,1,Hall,
+30,4,1,null,
 30,5,1,null,
 30,6,1,null,
 30,7,1,null,
@@ -1912,9 +1913,9 @@
 50,11,2,Hall,
 50,12,2,Weight Room,Klein/Cain/Courter/Terry
 50,13,2,Hall,
-50,14,2,Intersection,
+50,14,2,Hall,
 50,15,2,Hall,
-50,16,2,Intersection,
+50,16,2,Hall,
 50,17,2,Hall,
 50,18,2,1009,Fournier
 50,19,2,1011,Plummer

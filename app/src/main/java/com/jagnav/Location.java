@@ -1,6 +1,6 @@
 package com.jagnav;
 
-public class Location {
+public abstract class Location {
     int floor;
     int heuristic;
 

@@ -78,12 +78,17 @@ public class MainActivity extends AppCompatActivity {
         for (int x: coords) {
             System.out.println("{" + x + "}");
         }
-        int[] endCoords = {3, 5};
+        for (Location loc: test.getSchoolMap().get(0)) {
+            System.out.print(loc);
+        }
+        int[] endCoords = {7, 3};
         pf.move(coords, endCoords);
         }
         catch (Exception l) {
             l.printStackTrace();
         }
+
+
 
 
 
