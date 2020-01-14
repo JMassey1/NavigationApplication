@@ -81,8 +81,10 @@ public class Map {
         }
         for (int x = 0; x < Integer.parseInt(schoolMap.get(schoolMap.size() - 1)[0]); x++) {
             ArrayList<Location> newRow = new ArrayList<>();
-            RowTest testNum = new RowTest(x);
-            newRow.add(testNum);
+            if (x < 38) {
+                RowTest testNum = new RowTest(x);
+                newRow.add(testNum);
+            }
             for (String[] cell: schoolMap) {
 
                 if (cell[1].matches(Integer.toString(x))) {

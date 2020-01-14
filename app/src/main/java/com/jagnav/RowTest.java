@@ -8,6 +8,9 @@ public class RowTest extends Location {
         this.rowNum = rowNum;
     }
     public String toString() {
+        if (rowNum < 10) {
+            return "0" + rowNum;
+        }
         return Integer.toString(rowNum);
     }
 }

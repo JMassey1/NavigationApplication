@@ -26,7 +26,13 @@ public class PathFinder {
         throw new LocationNotFound("getting coords failed");
     }
 
-    public void move(int[] initial, int[] end) throws LocationNotFound{
+    public void move(Location start, Location dest) throws LocationNotFound{
+        Map finder = new Map();
+        int[] initial = getCoordinates(start);
+        int[] end = getCoordinates(dest);
+        if (start.getFloor() != dest.getFloor()) {
+
+        }
         int[] currentPos = initial;
         while (!(Arrays.equals(currentPos, end))) {
 
@@ -91,7 +97,7 @@ public class PathFinder {
 
     public boolean canMove(int[] endPos) {
         Location nextLoc = map.get(endPos[0]).get(endPos[1]);
-        if (!(nextLoc instanceof VoidLocation)) {
+        if (!(nextLoc instanceof VoidLocation) || !(nextLoc instanceof RowTest)) {
             return true;
         }
         return false;
