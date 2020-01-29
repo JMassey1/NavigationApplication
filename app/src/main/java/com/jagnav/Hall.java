@@ -1,7 +1,7 @@
 package com.jagnav;
 
 public class Hall extends Location {
-    int[] nearbyRooms;
+    private int[] nearbyRooms;
     public Hall(int f)
     {
         floor = f;

@@ -61,6 +61,7 @@ public class Map {
     }
 
     public void printMap() {
+       // System.out.println("--00000000000000000000000000000L");
         for (List<Location> row : schoolMap2) {
             for (Location loc: row) {
                 System.out.print(loc);
@@ -76,9 +77,9 @@ public class Map {
 
     public void populateMap(){
 
-        for (String i: schoolMap.get(0)) {
-            System.out.println(i);
-        }
+//        for (String i: schoolMap.get(0)) {
+//            System.out.println(i);
+//        }
         for (int x = 0; x < Integer.parseInt(schoolMap.get(schoolMap.size() - 1)[0]); x++) {
             ArrayList<Location> newRow = new ArrayList<>();
             if (x < 38) {

@@ -1,8 +1,9 @@
 package com.jagnav;
 
 public class ClassRoom extends Location {
-    String roomNum,teacher,name;
-    int floor;
+    private String roomNum,teacher,name;
+    private int floor;
+
     public ClassRoom(int rn, String t, int f)
     {
         roomNum = Integer.toString(rn);
@@ -40,4 +41,5 @@ public class ClassRoom extends Location {
     public String toString() {
         return "C";
     }
+
 }

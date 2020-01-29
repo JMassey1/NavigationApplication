@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.print(loc);
         }
         int[] endCoords = {7, 3};
-        pf.move(coords, endCoords);
+        pf.move(test.findLocation("1"), test.findLocation("2"));
         }
         catch (Exception l) {
             l.printStackTrace();
