@@ -2,8 +2,9 @@ package com.jagnav;
 
 import android.content.res.AssetManager;
 
-
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,12 +19,47 @@ public class Map {
 
     }
 
+    public void resetParents() {
+        for (ArrayList<Location> a: schoolMap2) {
+            for (Location l: a) {
+                l.setParentLoc(null);
+            }
+        }
+    }
+
+    public Location findNearestStairs(Location currentLoc) {
+        try {
+            int[] currentPos = getCoordinates(currentLoc);
+            int xDist = Integer.MAX_VALUE;
+            int yDist = Integer.MAX_VALUE;
+
+
+
+        } catch (LocationNotFound l) {
+
+        }
+
+        return new VoidLocation();
+    }
+
+    public int[] getCoordinates(Location loc) throws LocationNotFound{
+        for (int y = 0; y < schoolMap2.size(); y++) {
+            for (int x = 0; x < schoolMap2.get(y).size(); x++) {
+                if (schoolMap2.get(y).get(x).equals(loc)) {
+                    return new int[]{y,x};
+                }
+            }
+        }
+        throw new LocationNotFound("getting coords failed");
+    }
+
+
+
     public Location findLocation(String roomNum) {
         for (int y = 0; y < schoolMap2.size(); y++) {
             for (int x = 0; x < schoolMap2.get(y).size(); x++) {
                 try {
                     ClassRoom temp = (ClassRoom) schoolMap2.get(y).get(x);
-                    //System.out.println("!!!!" + temp.getRoomNum());
                     if (temp instanceof ClassRoom && temp.getRoomNum() != null) {
                         if ((temp).getRoomNum().equals(roomNum)) {
                             return temp;

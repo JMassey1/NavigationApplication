@@ -7,27 +7,29 @@ import java.util.Collections;
 public class PathFinder {
 
     ArrayList<ArrayList<Location>> map;
+    Map schoolMap;
 
-    public PathFinder(ArrayList<ArrayList<Location>> map) {
-        this.map = map;
+    public PathFinder(Map schoolMap) {
+        this.schoolMap = schoolMap;
+        map = schoolMap.getSchoolMap();
     }
 
-    public int[] getCoordinates(Location loc) throws LocationNotFound{
-        for (int y = 0; y < map.size(); y++) {
-            for (int x = 0; x < map.get(y).size(); x++) {
-                if (map.get(y).get(x).equals(loc)) {
-                    return new int[]{y,x};
-                }
-            }
+
+    public void findPath(Location start, Location dest) throws LocationNotFound{
+        try {
+            move(start,dest);
+        } catch (MismatchFloor m) {
+
         }
-        throw new LocationNotFound("getting coords failed");
+        schoolMap.resetParents();
     }
 
-    public void move(Location start, Location dest) throws LocationNotFound{
-        int[] initial = getCoordinates(start);
-        int[] end = getCoordinates(dest);
+
+    public void move(Location start, Location dest) throws LocationNotFound, MismatchFloor{
+        int[] initial = schoolMap.getCoordinates(start);
+        int[] end = schoolMap.getCoordinates(dest);
         if (start.getFloor() != dest.getFloor()) {
-            int[] finalEnd = end;
+            throw new MismatchFloor("Locations are on separate floors");
         }
         int[] currentPos = initial;
 
@@ -40,7 +42,7 @@ public class PathFinder {
             Collections.sort(openNodes);
             Location currentLoc = openNodes.remove(0);
             closedNodes.add(currentLoc);
-            currentPos = getCoordinates(currentLoc);
+            currentPos = schoolMap.getCoordinates(currentLoc);
             //System.out.println(currentPos[0] + ", " + currentPos[1]);
 
             //gets all locations surrounding current node
@@ -72,7 +74,7 @@ public class PathFinder {
                         neighbor.setGCost(newMovementCost);
                         neighbor.setHCost(getDistance(neighbor, dest));
                         neighbor.calculateFCost();
-                        int[] neighborPos = getCoordinates(neighbor);
+                        int[] neighborPos = schoolMap.getCoordinates(neighbor);
                         //System.out.println("NEIGHBOR COORDINATES");
                         //System.out.println("!!!!!" + neighborPos[0] + ", " + neighborPos[1]);
                         //System.out.println("SETTING PARENT LOC");
@@ -88,25 +90,19 @@ public class PathFinder {
         System.out.println("SUCCESS");
         ArrayList<Location> route = getRoute(start,dest);
         for (Location loc: route) {
-            int[] locCoords = getCoordinates(loc);
+            int[] locCoords = schoolMap.getCoordinates(loc);
             System.out.println(locCoords[0] + ", " + locCoords[1]);
         }
 
     }
-
+    //returns an array of Locations in order from start to finish
     public ArrayList<Location> getRoute(Location start, Location end) throws LocationNotFound{
-
         ArrayList<Location> route = new ArrayList<>();
         Location currentLoc = end;
-        int[] startPos = getCoordinates(start), endPos = getCoordinates(end);
-        //System.out.println("START: " + startPos[0] + ", " + startPos[1]);
-        //System.out.println("END:   " + endPos[0] + ", " + endPos[1]);
-
+        route.add(end);
         while (!currentLoc.equals(start)) {
-            //System.out.println("poop");
             Location parentLoc = currentLoc.getParentLoc();
             route.add(parentLoc);
-            //System.out.println(parentLoc);
             currentLoc = parentLoc;
         }
         Collections.reverse(route);
@@ -114,8 +110,7 @@ public class PathFinder {
     }
 
     public void assignHeuristic(Location loc, int[] startPos, int[] endPos) throws LocationNotFound {
-
-        int[] currentPos = getCoordinates(loc);
+        int[] currentPos = schoolMap.getCoordinates(loc);
 
         if (canMove(loc)) {
             //Calculate G_Cost (Distance from current cell to start cell)
@@ -129,16 +124,6 @@ public class PathFinder {
         }
 
 
-
-
-//        if (!canMove(loc)) {
-//            loc.setHeuristic(Integer.MAX_VALUE);
-//        } else {
-//            int[] currentPos = getCoordinates(loc);
-//            loc.setHeuristic(Math.abs(currentPos[0] - endPos[0]) + Math.abs(currentPos[1] - endPos[1]));
-//        }
-
-
     }
 
     public boolean canMove(Location end) {
@@ -150,7 +135,7 @@ public class PathFinder {
     }
 
     public int getDistance(Location start, Location end) throws LocationNotFound{
-        int[] startPos = getCoordinates(start), endPos = getCoordinates(end);
+        int[] startPos = schoolMap.getCoordinates(start), endPos = schoolMap.getCoordinates(end);
         return Math.abs(startPos[0] - endPos[0]) + Math.abs(startPos[1] - endPos[1]);
     }
 

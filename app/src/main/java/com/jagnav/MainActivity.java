@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
         test.populateMap();
         test.printMap();
 
-        PathFinder pf = new PathFinder(test.getSchoolMap());
+        PathFinder pf = new PathFinder(test);
         try {
-        int[] coords = (pf.getCoordinates(test.findLocation("905")));
+        int[] coords = (test.getCoordinates(test.findLocation("905")));
         System.out.println("Finding coordinates for room 905");
         for (int x: coords) {
             System.out.println("{" + x + "}");
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.print(loc);
         }
         //int[] endCoords = {7, 3};
-        pf.move(test.findLocation("1"), test.findLocation("903"));
+        pf.findPath(test.findLocation("1"), test.findLocation("905"));
         }
         catch (Exception l) {
             l.printStackTrace();
