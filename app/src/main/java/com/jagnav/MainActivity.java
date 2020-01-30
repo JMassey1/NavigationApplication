@@ -2,35 +2,20 @@ package com.jagnav;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
+import android.view.Menu;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
-
-import com.jagnav.Map;
-import com.jagnav.PathFinder;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -81,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
         for (Location loc: test.getSchoolMap().get(0)) {
             System.out.print(loc);
         }
-        int[] endCoords = {7, 3};
-        pf.move(test.findLocation("1"), test.findLocation("2"));
+        //int[] endCoords = {7, 3};
+        pf.move(test.findLocation("1"), test.findLocation("903"));
         }
         catch (Exception l) {
             l.printStackTrace();

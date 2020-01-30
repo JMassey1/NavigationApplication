@@ -1,6 +1,6 @@
 package com.jagnav;
+
 import java.util.ArrayList;
-import java.lang.Math;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -10,10 +10,6 @@ public class PathFinder {
 
     public PathFinder(ArrayList<ArrayList<Location>> map) {
         this.map = map;
-    }
-
-    public String[] findPath(Location start, Location end) {
-        return new String[]{"test","test","test"};
     }
 
     public int[] getCoordinates(Location loc) throws LocationNotFound{
@@ -45,7 +41,7 @@ public class PathFinder {
             Location currentLoc = openNodes.remove(0);
             closedNodes.add(currentLoc);
             currentPos = getCoordinates(currentLoc);
-            System.out.println(currentPos[0] + ", " + currentPos[1]);
+            //System.out.println(currentPos[0] + ", " + currentPos[1]);
 
             //gets all locations surrounding current node
             Location upOne = map.get(currentPos[0] - 1).get(currentPos[1]);
@@ -68,7 +64,6 @@ public class PathFinder {
 
 
             for (Location neighbor: neighbors) {
-                //System.out.println("dumpy");
                 if (neighbor.getHeuristic() == Integer.MAX_VALUE || closedNodes.contains(neighbor)) {
                     continue;
                 } else {
@@ -77,6 +72,10 @@ public class PathFinder {
                         neighbor.setGCost(newMovementCost);
                         neighbor.setHCost(getDistance(neighbor, dest));
                         neighbor.calculateFCost();
+                        int[] neighborPos = getCoordinates(neighbor);
+                        //System.out.println("NEIGHBOR COORDINATES");
+                        //System.out.println("!!!!!" + neighborPos[0] + ", " + neighborPos[1]);
+                        //System.out.println("SETTING PARENT LOC");
                         neighbor.setParentLoc(currentLoc);
                         if (!(openNodes.contains(neighbor))) {
                             openNodes.add(neighbor);
@@ -85,40 +84,6 @@ public class PathFinder {
 
                 }
             }
-
-
-            /*
-            Location temp = null;
-
-            //if the y value has the biggest gap
-            if (Math.abs(currentPos[0] - end[0]) < Math.abs(currentPos[1] - end[1])) {
-                temp = leftOne;
-                if (rightOne.getHeuristic() < temp.getHeuristic())
-                    temp = rightOne;
-                if (downOne.getHeuristic() < temp.getHeuristic())
-                    temp = downOne;
-                if (upOne.getHeuristic() < temp.getHeuristic())
-                    temp = upOne;
-            }
-            //if the x value has the biggest gap
-            else {
-                temp = upOne;
-                if (downOne.getHeuristic() < temp.getHeuristic())
-                    temp = downOne;
-                if (rightOne.getHeuristic() < temp.getHeuristic())
-                    temp = rightOne;
-                if (leftOne.getHeuristic() < temp.getHeuristic())
-                    temp = leftOne;
-
-            }
-            temp.setHeuristic(Integer.MAX_VALUE);
-
-            currentPos = getCoordinates(temp);
-
-            System.out.println(currentPos[0] + ", " + currentPos[1]);
-            System.out.println(temp.getHeuristic());
-
-             */
         }
         System.out.println("SUCCESS");
         ArrayList<Location> route = getRoute(start,dest);
@@ -129,16 +94,22 @@ public class PathFinder {
 
     }
 
-    public ArrayList<Location> getRoute(Location start, Location end) {
+    public ArrayList<Location> getRoute(Location start, Location end) throws LocationNotFound{
+
         ArrayList<Location> route = new ArrayList<>();
-        Location currentLoc = start;
-        while (!currentLoc.equals(end)) {
-            System.out.println("poop");
+        Location currentLoc = end;
+        int[] startPos = getCoordinates(start), endPos = getCoordinates(end);
+        //System.out.println("START: " + startPos[0] + ", " + startPos[1]);
+        //System.out.println("END:   " + endPos[0] + ", " + endPos[1]);
+
+        while (!currentLoc.equals(start)) {
+            //System.out.println("poop");
             Location parentLoc = currentLoc.getParentLoc();
             route.add(parentLoc);
+            //System.out.println(parentLoc);
             currentLoc = parentLoc;
         }
-
+        Collections.reverse(route);
         return route;
     }
 
