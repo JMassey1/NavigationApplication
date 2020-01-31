@@ -17,15 +17,32 @@ public class PathFinder {
 
     public void findPath(Location start, Location dest) throws LocationNotFound{
         try {
-            move(start,dest);
+            ArrayList<Location> route = move(start,dest);
+            for (Location loc: route) {
+                int[] locCoords = schoolMap.getCoordinates(loc);
+                System.out.println(locCoords[0] + ", " + locCoords[1]);
+            }
         } catch (MismatchFloor m) {
+            try {
+                Location end = dest;
+                dest = schoolMap.findNearestStairs(start);
 
+                ArrayList<Location> route = new ArrayList<>();
+                route = move(start, dest);
+                route.addAll(move(((Stairs)dest).getLinkedLoc(), end));
+                for (Location loc: route) {
+                    int[] locCoords = schoolMap.getCoordinates(loc);
+                    System.out.println(locCoords[0] + ", " + locCoords[1]);
+                }
+            } catch (MismatchFloor m1) {
+                m1.printStackTrace();
+            }
         }
         schoolMap.resetParents();
     }
 
 
-    public void move(Location start, Location dest) throws LocationNotFound, MismatchFloor{
+    public ArrayList<Location> move(Location start, Location dest) throws LocationNotFound, MismatchFloor{
         int[] initial = schoolMap.getCoordinates(start);
         int[] end = schoolMap.getCoordinates(dest);
         if (start.getFloor() != dest.getFloor()) {
@@ -89,10 +106,8 @@ public class PathFinder {
         }
         System.out.println("SUCCESS");
         ArrayList<Location> route = getRoute(start,dest);
-        for (Location loc: route) {
-            int[] locCoords = schoolMap.getCoordinates(loc);
-            System.out.println(locCoords[0] + ", " + locCoords[1]);
-        }
+
+        return route;
 
     }
     //returns an array of Locations in order from start to finish

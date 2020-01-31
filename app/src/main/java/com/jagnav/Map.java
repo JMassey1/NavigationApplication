@@ -27,19 +27,29 @@ public class Map {
         }
     }
 
-    public Location findNearestStairs(Location currentLoc) {
-        try {
+    public Location findNearestStairs(Location currentLoc) throws LocationNotFound {
+
             int[] currentPos = getCoordinates(currentLoc);
-            int xDist = Integer.MAX_VALUE;
-            int yDist = Integer.MAX_VALUE;
+            int dist = Integer.MAX_VALUE;
+            Location nearestStairs = null;
+            for (ArrayList<Location> a: schoolMap2) {
+                for (Location loc: a) {
+                    int[] testPos = getCoordinates(loc);
+                    if (loc instanceof Stairs && Math.sqrt(Math.pow(testPos[0] - currentPos[0],2) + Math.pow(testPos[1] - currentPos[1],2)) < dist) {
+                        nearestStairs = loc;
+                    }
+                }
+            }
+
+            if (nearestStairs == null) {
+                throw new LocationNotFound("Could not find Stairs in Map");
+            }
+
+            return nearestStairs;
 
 
 
-        } catch (LocationNotFound l) {
 
-        }
-
-        return new VoidLocation();
     }
 
     public int[] getCoordinates(Location loc) throws LocationNotFound{
@@ -97,18 +107,12 @@ public class Map {
     }
 
     public void printMap() {
-       // System.out.println("--00000000000000000000000000000L");
         for (List<Location> row : schoolMap2) {
             for (Location loc: row) {
                 System.out.print(loc);
             }
             System.out.println();
         }
-        //System.out.println("TEST");
-//        for (Location loc: schoolMap2.get(0)) {
-//            System.out.print(loc);
-//        }
-//        System.out.println();
     }
 
     public void populateMap(){
