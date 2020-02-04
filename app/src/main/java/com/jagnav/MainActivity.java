@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.print(loc);
         }
         //int[] endCoords = {7, 3};
-        pf.findPath(test.findLocation("1"), test.findLocation("905"));
+        pf.findPath(test.findLocation("1015"), test.findLocation("905"));
         }
         catch (Exception l) {
             l.printStackTrace();

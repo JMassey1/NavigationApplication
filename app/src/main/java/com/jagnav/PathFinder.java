@@ -27,6 +27,9 @@ public class PathFinder {
                 Location end = dest;
                 dest = schoolMap.findNearestStairs(start);
 
+                int[] destPos = schoolMap.getCoordinates(dest);
+                System.out.println("[" + destPos[0] + "," + destPos[1] + "]");
+
                 ArrayList<Location> route = new ArrayList<>();
                 route = move(start, dest);
                 route.addAll(move(((Stairs)dest).getLinkedLoc(), end));
