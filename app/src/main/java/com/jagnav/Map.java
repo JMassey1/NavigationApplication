@@ -115,6 +115,20 @@ public class Map {
         }
     }
 
+    public void initializeStairs() {
+        for (ArrayList<Location> arr: schoolMap2) {
+            for (Location l: arr) {
+                if (l instanceof Stairs) {
+                    int[][] pos = ((Stairs) l).getLinkedCoordinates();
+                    for (int[] locPos: pos) {
+                        Location temp = schoolMap2.get(locPos[0]).get(locPos[1]);
+                        l.setParentLoc(temp);
+                    }
+                }
+            }
+        }
+    }
+
     public void populateMap(){
 
 //        for (String i: schoolMap.get(0)) {
@@ -140,7 +154,13 @@ public class Map {
                         if (cell[3].contains("null")) {
                             newRow.add(new VoidLocation());
                         } else if (cell[3].contains("Stairs")) {
-                            newRow.add(new Stairs());
+                            int[][] temp;
+                            if (cell[4].matches("1")) {
+                                temp = new int[][]{{Integer.parseInt(cell[5]),Integer.parseInt(cell[6])}};
+                            } else {
+                                temp = new int[][]{{Integer.parseInt(cell[5]),Integer.parseInt(cell[6])},{Integer.parseInt(cell[7]),Integer.parseInt(cell[8])}};
+                            }
+                            newRow.add(new Stairs(temp));
                         } else if (cell[3].contains("Hall")) {
                             newRow.add(new Hall(1));
                         } else if (cell[3].contains("Exit")) {
@@ -156,6 +176,8 @@ public class Map {
             schoolMap2.add(newRow);
         }
 
+        //add loop to create linkedLoc's for stairs
+        initializeStairs();
 
     }
 
