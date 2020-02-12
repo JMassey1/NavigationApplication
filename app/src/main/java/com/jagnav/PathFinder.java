@@ -56,8 +56,13 @@ public class PathFinder {
         ArrayList<Location> openNodes = new ArrayList<>();
         ArrayList<Location> closedNodes = new ArrayList<>();
         openNodes.add(start);
-
+        //System.out.println("Start: " + start);
+        //System.out.println("openNodes[0]: " + openNodes.get(0));
         while (!(Arrays.equals(currentPos, end))) {
+            for (Location nodes : openNodes) {
+                System.out.println("-----------");
+                System.out.println("nodes: " + nodes);
+            }
             //find lowest fCost. Move it from opened to closed
             Collections.sort(openNodes);
             Location currentLoc = openNodes.remove(0);
@@ -107,7 +112,11 @@ public class PathFinder {
                 }
             }
         }
-        System.out.println("SUCCESS");
+        if (openNodes.size() == 0) {
+            System.out.println("NOT SUCCESS");
+        } else {
+            System.out.println("SUCCESS");
+        }
         ArrayList<Location> route = getRoute(start,dest);
 
         return route;

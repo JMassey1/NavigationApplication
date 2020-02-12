@@ -115,13 +115,18 @@ public class Map {
         }
     }
 
-    public void initializeStairs() {
+    public void initializeStairs() throws LocationNotFound{
         for (ArrayList<Location> arr: schoolMap2) {
             for (Location l: arr) {
                 if (l instanceof Stairs) {
                     int[][] pos = ((Stairs) l).getLinkedCoordinates();
                     for (int[] locPos: pos) {
-                        Location temp = schoolMap2.get(locPos[0]).get(locPos[1]);
+                        Location temp = schoolMap2.get(locPos[1]).get(locPos[0]);
+                        int[] coords = getCoordinates(temp);
+                        System.out.println("TEST");
+                        for (int x: coords) {
+                            System.out.println(x);
+                        }
                         l.setParentLoc(temp);
                     }
                 }
@@ -145,7 +150,7 @@ public class Map {
                 if (cell[1].matches(Integer.toString(x))) {
 
                     try {
-                        if (Integer.parseInt(cell[3]) > 0 | cell[3].contains("/")) {
+                        if (Integer.parseInt(cell[3]) > 0 || cell[3].contains("/")) {
                             newRow.add(new ClassRoom(Integer.parseInt(cell[3]), cell[4], Integer.parseInt(cell[2])));
                         } else {
 
@@ -177,8 +182,11 @@ public class Map {
         }
 
         //add loop to create linkedLoc's for stairs
-        initializeStairs();
-
+        try {
+            initializeStairs();
+        } catch (LocationNotFound l) {
+            l.printStackTrace();
+        }
     }
 
 
