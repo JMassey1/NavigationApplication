@@ -66,12 +66,22 @@ public class Map {
 
 
     public Location findLocation(String roomNum) {
-        for (int y = 0; y < schoolMap2.size(); y++) {
-            for (int x = 0; x < schoolMap2.get(y).size(); x++) {
+        System.out.println("!!!!!!!" + roomNum);
+        for (ArrayList<Location> arrayLoc: schoolMap2) {
+            for (Location temp: arrayLoc) {
                 try {
-                    ClassRoom temp = (ClassRoom) schoolMap2.get(y).get(x);
-                    if (temp instanceof ClassRoom && temp.getRoomNum() != null) {
-                        if ((temp).getRoomNum().equals(roomNum)) {
+                    if (temp instanceof ClassRoom && ((ClassRoom)temp).getRoomNum() != null) {
+                        //System.out.println(((ClassRoom)temp).getRoomNum());
+                        if (((ClassRoom)temp).getRoomNum().contains("/")) {
+                            System.out.println(((ClassRoom)temp).getRoomNum());
+                            String[] splitNum = ((ClassRoom)temp).getRoomNum().split("/");
+                            for (String roomName: splitNum) {
+                                if (roomName.equals(roomNum)) {
+                                    return temp;
+                                }
+                            }
+                        }
+                        if (((ClassRoom)temp).getRoomNum().equals(roomNum)) {
                             return temp;
                         }
                     }
@@ -107,7 +117,12 @@ public class Map {
     }
 
     public void printMap() {
+        int count = 0;
         for (List<Location> row : schoolMap2) {
+            count++;
+            if (count < 38) {
+                System.out.print(count);
+            }
             for (Location loc: row) {
                 System.out.print(loc);
             }
@@ -141,10 +156,6 @@ public class Map {
 //        }
         for (int x = 0; x < Integer.parseInt(schoolMap.get(schoolMap.size() - 1)[0]); x++) {
             ArrayList<Location> newRow = new ArrayList<>();
-            if (x < 38) {
-                RowTest testNum = new RowTest(x);
-                newRow.add(testNum);
-            }
             for (String[] cell: schoolMap) {
 
                 if (cell[1].matches(Integer.toString(x))) {
@@ -159,13 +170,7 @@ public class Map {
                         if (cell[3].contains("null")) {
                             newRow.add(new VoidLocation());
                         } else if (cell[3].contains("Stairs")) {
-                            int[][] temp;
-                            if (cell[4].matches("1")) {
-                                temp = new int[][]{{Integer.parseInt(cell[5]),Integer.parseInt(cell[6])}};
-                            } else {
-                                temp = new int[][]{{Integer.parseInt(cell[5]),Integer.parseInt(cell[6])},{Integer.parseInt(cell[7]),Integer.parseInt(cell[8])}};
-                            }
-                            newRow.add(new Stairs(temp));
+                            newRow.add(new Stairs(new int[][]{{Integer.parseInt(cell[4]),Integer.parseInt(cell[5])}}));
                         } else if (cell[3].contains("Hall")) {
                             newRow.add(new Hall(1));
                         } else if (cell[3].contains("Exit")) {

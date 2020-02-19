@@ -58,16 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
         PathFinder pf = new PathFinder(test);
         try {
-        int[] coords = (test.getCoordinates(test.findLocation("905")));
-        System.out.println("Finding coordinates for room 905");
-        for (int x: coords) {
-            System.out.println("{" + x + "}");
-        }
-        for (Location loc: test.getSchoolMap().get(0)) {
-            System.out.print(loc);
-        }
         //int[] endCoords = {7, 3};
-        pf.findPath(test.findLocation("107"), test.findLocation("921"));
+        pf.findPath(test.findLocation("111"), test.findLocation("925"));
         }
         catch (Exception l) {
             l.printStackTrace();
