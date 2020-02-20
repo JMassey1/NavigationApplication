@@ -71,7 +71,7 @@ public class Map {
             for (Location temp: arrayLoc) {
                 try {
                     if (temp instanceof ClassRoom && ((ClassRoom)temp).getRoomNum() != null) {
-                        //System.out.println(((ClassRoom)temp).getRoomNum());
+                        System.out.println(((ClassRoom)temp).getRoomNum());
                         if (((ClassRoom)temp).getRoomNum().contains("/")) {
                             System.out.println(((ClassRoom)temp).getRoomNum());
                             String[] splitNum = ((ClassRoom)temp).getRoomNum().split("/");

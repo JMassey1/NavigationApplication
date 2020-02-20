@@ -19,6 +19,7 @@ public class ClassRoom extends Location {
 
     public ClassRoom(String name, int f) {
         this.name = name;
+        this.roomNum = name;
         floor = f;
     }
 

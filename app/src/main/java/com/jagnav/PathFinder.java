@@ -68,6 +68,7 @@ public class PathFinder {
             //System.out.println(currentPos[0] + ", " + currentPos[1]);
 
             //gets all locations surrounding current node
+            System.out.println("currentPos: " + currentPos[0]+","+currentPos[1]);
             Location upOne = map.get(currentPos[0] - 1).get(currentPos[1]);
             Location rightOne = map.get(currentPos[0]).get(currentPos[1] + 1);
             Location downOne = map.get(currentPos[0] + 1).get(currentPos[1]);
