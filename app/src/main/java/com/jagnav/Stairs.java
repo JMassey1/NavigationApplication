@@ -23,6 +23,10 @@ public class Stairs extends Location {
         return linkedCoordinates;
     }
 
+    public void setLinkedLoc(Stairs loc) {
+        linkedLoc = loc;
+    }
+
     public void setLinkedCoordinates(int[][] linkedCoordinates) {
         this.linkedCoordinates = linkedCoordinates;
     }

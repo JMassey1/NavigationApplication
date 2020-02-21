@@ -17,7 +17,7 @@ public class PathFinder {
 
     public void findPath(Location start, Location dest) throws LocationNotFound{
         try {
-            ArrayList<Location> route = move(start,dest);
+            ArrayList<Location> route = move(start,dest, true);
             for (Location loc: route) {
                 int[] locCoords = schoolMap.getCoordinates(loc);
                 System.out.println(locCoords[0] + ", " + locCoords[1]);
@@ -31,8 +31,9 @@ public class PathFinder {
                 System.out.println("[" + destPos[0] + "," + destPos[1] + "]");
 
                 ArrayList<Location> route = new ArrayList<>();
-                route = move(start, dest);
-                route.addAll(move(((Stairs)dest).getLinkedLoc(), end));
+                route = move(start, dest, false);
+                System.out.println(((Stairs)dest).getLinkedLoc());
+                route.addAll(move(((Stairs)dest).getLinkedLoc(), end,false));
                 for (Location loc: route) {
                     int[] locCoords = schoolMap.getCoordinates(loc);
                     System.out.println(locCoords[0] + ", " + locCoords[1]);
@@ -45,12 +46,14 @@ public class PathFinder {
     }
 
 
-    public ArrayList<Location> move(Location start, Location dest) throws LocationNotFound, MismatchFloor{
-        int[] initial = schoolMap.getCoordinates(start);
-        int[] end = schoolMap.getCoordinates(dest);
-        if (start.getFloor() != dest.getFloor()) {
+    public ArrayList<Location> move(Location start, Location dest, Boolean firstRun) throws LocationNotFound, MismatchFloor{
+        if (firstRun && start.getFloor() != dest.getFloor()) {
+            System.out.printf("FLOORS%n%n%s%n%s%n%n",start.getFloor(),dest.getFloor());
             throw new MismatchFloor("Locations are on separate floors");
         }
+        int[] initial = schoolMap.getCoordinates(start);
+        int[] end = schoolMap.getCoordinates(dest);
+
         int[] currentPos = initial;
 
         ArrayList<Location> openNodes = new ArrayList<>();
@@ -98,9 +101,6 @@ public class PathFinder {
                         neighbor.setHCost(getDistance(neighbor, dest));
                         neighbor.calculateFCost();
                         int[] neighborPos = schoolMap.getCoordinates(neighbor);
-                        //System.out.println("NEIGHBOR COORDINATES");
-                        //System.out.println("!!!!!" + neighborPos[0] + ", " + neighborPos[1]);
-                        //System.out.println("SETTING PARENT LOC");
                         neighbor.setParentLoc(currentLoc);
                         if (!(openNodes.contains(neighbor))) {
                             openNodes.add(neighbor);

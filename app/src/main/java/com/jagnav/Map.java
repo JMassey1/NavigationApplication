@@ -71,9 +71,9 @@ public class Map {
             for (Location temp: arrayLoc) {
                 try {
                     if (temp instanceof ClassRoom && ((ClassRoom)temp).getRoomNum() != null) {
-                        System.out.println(((ClassRoom)temp).getRoomNum());
+                       // System.out.println(((ClassRoom)temp).getRoomNum());
                         if (((ClassRoom)temp).getRoomNum().contains("/")) {
-                            System.out.println(((ClassRoom)temp).getRoomNum());
+                            //System.out.println(((ClassRoom)temp).getRoomNum());
                             String[] splitNum = ((ClassRoom)temp).getRoomNum().split("/");
                             for (String roomName: splitNum) {
                                 if (roomName.equals(roomNum)) {
@@ -117,7 +117,7 @@ public class Map {
     }
 
     public void printMap() {
-        int count = 0;
+        int count = -1;
         for (List<Location> row : schoolMap2) {
             count++;
             if (count < 38) {
@@ -138,11 +138,13 @@ public class Map {
                     for (int[] locPos: pos) {
                         Location temp = schoolMap2.get(locPos[1]).get(locPos[0]);
                         int[] coords = getCoordinates(temp);
-                        System.out.println("TEST");
+                        System.out.println(coords[0]);
+                        System.out.println(coords[1]);
+                        //System.out.println("TEST");
                         for (int x: coords) {
                             System.out.println(x);
                         }
-                        l.setParentLoc(temp);
+                       // ((Stairs)l).setLinkedLoc((Stairs)temp);
                     }
                 }
             }
