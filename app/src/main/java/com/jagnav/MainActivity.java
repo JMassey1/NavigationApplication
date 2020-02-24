@@ -58,10 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
         PathFinder pf = new PathFinder(test);
         try {
-        //int[] endCoords = {7, 3};
-        System.out.println("libary---" + ((ClassRoom)(test.findLocation("library"))).getFloor());
-        System.out.println("1021---" + ((ClassRoom)(test.findLocation("1025"))).getFloor());
-        pf.findPath(test.findLocation("library"), test.findLocation("1021"));
+        pf.findPath(test.findLocation("library"), test.findLocation("1023"));
+
         }
         catch (Exception l) {
             l.printStackTrace();

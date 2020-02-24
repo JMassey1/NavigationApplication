@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,8 +21,8 @@ public class Map {
     }
 
     public void resetParents() {
-        for (ArrayList<Location> a: schoolMap2) {
-            for (Location l: a) {
+        for (ArrayList<Location> a : schoolMap2) {
+            for (Location l : a) {
                 l.setParentLoc(null);
             }
         }
@@ -29,34 +30,34 @@ public class Map {
 
     public Location findNearestStairs(Location currentLoc) throws LocationNotFound {
 
-            int[] currentPos = getCoordinates(currentLoc);
-            int dist = Integer.MAX_VALUE;
-            Location nearestStairs = null;
-            for (ArrayList<Location> a: schoolMap2) {
-                for (Location loc: a) {
-                    int[] testPos = getCoordinates(loc);
-                    if (loc instanceof Stairs && Math.sqrt(Math.pow(testPos[0] - currentPos[0],2) + Math.pow(testPos[1] - currentPos[1],2)) < dist) {
-                        nearestStairs = loc;
-                    }
+        int[] currentPos = getCoordinates(currentLoc);
+        double dist = Integer.MAX_VALUE;
+        Location nearestStairs = null;
+        for (ArrayList<Location> a : schoolMap2) {
+            for (Location loc : a) {
+                int[] testPos = getCoordinates(loc);
+
+                if (loc instanceof Stairs && Math.sqrt(Math.pow(testPos[0] - currentPos[0], 2) + Math.pow(testPos[1] - currentPos[1], 2)) < dist) {
+                    dist = Math.sqrt(Math.pow(testPos[0] - currentPos[0], 2) + Math.pow(testPos[1] - currentPos[1], 2));
+                    nearestStairs = loc;
                 }
             }
+        }
 
-            if (nearestStairs == null) {
-                throw new LocationNotFound("Could not find Stairs in Map");
-            }
+        if (nearestStairs == null) {
+            throw new LocationNotFound("Could not find Stairs in Map");
+        }
 
-            return nearestStairs;
-
-
+        return nearestStairs;
 
 
     }
 
-    public int[] getCoordinates(Location loc) throws LocationNotFound{
+    public int[] getCoordinates(Location loc) throws LocationNotFound {
         for (int y = 0; y < schoolMap2.size(); y++) {
             for (int x = 0; x < schoolMap2.get(y).size(); x++) {
                 if (schoolMap2.get(y).get(x).equals(loc)) {
-                    return new int[]{y,x};
+                    return new int[]{y, x};
                 }
             }
         }
@@ -64,24 +65,20 @@ public class Map {
     }
 
 
-
     public Location findLocation(String roomNum) {
-        System.out.println("!!!!!!!" + roomNum);
-        for (ArrayList<Location> arrayLoc: schoolMap2) {
-            for (Location temp: arrayLoc) {
+        for (ArrayList<Location> arrayLoc : schoolMap2) {
+            for (Location temp : arrayLoc) {
                 try {
-                    if (temp instanceof ClassRoom && ((ClassRoom)temp).getRoomNum() != null) {
-                       // System.out.println(((ClassRoom)temp).getRoomNum());
-                        if (((ClassRoom)temp).getRoomNum().contains("/")) {
-                            //System.out.println(((ClassRoom)temp).getRoomNum());
-                            String[] splitNum = ((ClassRoom)temp).getRoomNum().split("/");
-                            for (String roomName: splitNum) {
+                    if (temp instanceof ClassRoom && ((ClassRoom) temp).getRoomNum() != null) {
+                        if (((ClassRoom) temp).getRoomNum().contains("/")) {
+                            String[] splitNum = ((ClassRoom) temp).getRoomNum().split("/");
+                            for (String roomName : splitNum) {
                                 if (roomName.equals(roomNum)) {
                                     return temp;
                                 }
                             }
                         }
-                        if (((ClassRoom)temp).getRoomNum().equals(roomNum)) {
+                        if (((ClassRoom) temp).getRoomNum().equals(roomNum)) {
                             return temp;
                         }
                     }
@@ -97,7 +94,7 @@ public class Map {
         return schoolMap2;
     }
 
-    public void csvWrite(){
+    public void csvWrite() {
         System.out.println("Kylie is dumb");
     }
 
@@ -120,45 +117,36 @@ public class Map {
         int count = -1;
         for (List<Location> row : schoolMap2) {
             count++;
-            if (count < 38) {
-                System.out.print(count);
+            if (count <= 38) {
+                System.out.print(count % 10);
             }
-            for (Location loc: row) {
+            for (Location loc : row) {
                 System.out.print(loc);
             }
+            System.out.print(" EndRow");
             System.out.println();
         }
     }
 
-    public void initializeStairs() throws LocationNotFound{
-        for (ArrayList<Location> arr: schoolMap2) {
-            for (Location l: arr) {
+    public void initializeStairs() throws LocationNotFound {
+        for (ArrayList<Location> arr : schoolMap2) {
+            for (Location l : arr) {
                 if (l instanceof Stairs) {
-                    int[][] pos = ((Stairs) l).getLinkedCoordinates();
-                    for (int[] locPos: pos) {
-                        Location temp = schoolMap2.get(locPos[1]).get(locPos[0]);
-                        int[] coords = getCoordinates(temp);
-                        System.out.println(coords[0]);
-                        System.out.println(coords[1]);
-                        //System.out.println("TEST");
-                        for (int x: coords) {
-                            System.out.println(x);
-                        }
-                       // ((Stairs)l).setLinkedLoc((Stairs)temp);
-                    }
+                    int[] pos = ((Stairs) l).getLinkedCoordinates();
+                    Location temp = schoolMap2.get(pos[1]).get(pos[0]);
+
+
+                    ((Stairs)l).setLinkedLoc((Stairs)temp);
+
                 }
             }
         }
     }
 
-    public void populateMap(){
-
-//        for (String i: schoolMap.get(0)) {
-//            System.out.println(i);
-//        }
+    public void populateMap() {
         for (int x = 0; x < Integer.parseInt(schoolMap.get(schoolMap.size() - 1)[0]); x++) {
             ArrayList<Location> newRow = new ArrayList<>();
-            for (String[] cell: schoolMap) {
+            for (String[] cell : schoolMap) {
 
                 if (cell[1].matches(Integer.toString(x))) {
 
@@ -172,7 +160,7 @@ public class Map {
                         if (cell[3].contains("null")) {
                             newRow.add(new VoidLocation());
                         } else if (cell[3].contains("Stairs")) {
-                            newRow.add(new Stairs(new int[][]{{Integer.parseInt(cell[4]),Integer.parseInt(cell[5])}}));
+                            newRow.add(new Stairs(new int[]{Integer.parseInt(cell[4]), Integer.parseInt(cell[5])}));
                         } else if (cell[3].contains("Hall")) {
                             newRow.add(new Hall(1));
                         } else if (cell[3].contains("Exit")) {
@@ -185,7 +173,9 @@ public class Map {
                     }
                 }
             }
-            schoolMap2.add(newRow);
+            if (newRow.size() > 0) {
+                schoolMap2.add(newRow);
+            }
         }
 
         //add loop to create linkedLoc's for stairs
@@ -194,6 +184,11 @@ public class Map {
         } catch (LocationNotFound l) {
             l.printStackTrace();
         }
+        ArrayList<Location> voidBufferRow = new ArrayList<>();
+        for (int iterate = 0; iterate < schoolMap2.get(0).size(); iterate++) {
+            voidBufferRow.add(new VoidLocation());
+        }
+        schoolMap2.add(voidBufferRow);
     }
 
 

@@ -15,40 +15,40 @@ public class PathFinder {
     }
 
 
-    public void findPath(Location start, Location dest) throws LocationNotFound{
+    public ArrayList<Location> findPath(Location start, Location dest) throws LocationNotFound{
         try {
             ArrayList<Location> route = move(start,dest, true);
             for (Location loc: route) {
                 int[] locCoords = schoolMap.getCoordinates(loc);
                 System.out.println(locCoords[0] + ", " + locCoords[1]);
             }
+            return route;
         } catch (MismatchFloor m) {
             try {
-                Location end = dest;
-                dest = schoolMap.findNearestStairs(start);
 
-                int[] destPos = schoolMap.getCoordinates(dest);
-                System.out.println("[" + destPos[0] + "," + destPos[1] + "]");
+                Stairs end = (Stairs)schoolMap.findNearestStairs(start);
+                int[] firstEndPos = schoolMap.getCoordinates(end);
+                System.out.println("[" + firstEndPos[0] + "," + firstEndPos[1] + "]");
 
-                ArrayList<Location> route = new ArrayList<>();
-                route = move(start, dest, false);
-                System.out.println(((Stairs)dest).getLinkedLoc());
-                route.addAll(move(((Stairs)dest).getLinkedLoc(), end,false));
+                ArrayList<Location> route;
+                route = move(start, end, false);
+                route.addAll(move(end.getLinkedLoc(), dest,false));
                 for (Location loc: route) {
                     int[] locCoords = schoolMap.getCoordinates(loc);
                     System.out.println(locCoords[0] + ", " + locCoords[1]);
                 }
+                return route;
             } catch (MismatchFloor m1) {
                 m1.printStackTrace();
             }
         }
         schoolMap.resetParents();
+        return null;
     }
 
 
     public ArrayList<Location> move(Location start, Location dest, Boolean firstRun) throws LocationNotFound, MismatchFloor{
         if (firstRun && start.getFloor() != dest.getFloor()) {
-            System.out.printf("FLOORS%n%n%s%n%s%n%n",start.getFloor(),dest.getFloor());
             throw new MismatchFloor("Locations are on separate floors");
         }
         int[] initial = schoolMap.getCoordinates(start);
@@ -59,10 +59,7 @@ public class PathFinder {
         ArrayList<Location> openNodes = new ArrayList<>();
         ArrayList<Location> closedNodes = new ArrayList<>();
         openNodes.add(start);
-        //System.out.println("Start: " + start);
-        //System.out.println("openNodes[0]: " + openNodes.get(0));
         while (!(Arrays.equals(currentPos, end))) {
-            //System.out.println("poop");
             //find lowest fCost. Move it from opened to closed
             Collections.sort(openNodes);
             Location currentLoc = openNodes.remove(0);
@@ -71,7 +68,7 @@ public class PathFinder {
             //System.out.println(currentPos[0] + ", " + currentPos[1]);
 
             //gets all locations surrounding current node
-            System.out.println("currentPos: " + currentPos[0]+","+currentPos[1]);
+            //System.out.println("currentPos: " + currentPos[0]+","+currentPos[1]);
             Location upOne = map.get(currentPos[0] - 1).get(currentPos[1]);
             Location rightOne = map.get(currentPos[0]).get(currentPos[1] + 1);
             Location downOne = map.get(currentPos[0] + 1).get(currentPos[1]);
