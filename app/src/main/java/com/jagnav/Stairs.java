@@ -1,7 +1,6 @@
 package com.jagnav;
 
 public class Stairs extends Location {
-    int[] connectedFloors;
     int[] linkedCoordinates;
     Location linkedLoc;
     public Stairs(int[] ll) {
@@ -17,10 +16,6 @@ public class Stairs extends Location {
 
     public void setLinkedLoc(Stairs loc) {
         linkedLoc = loc;
-    }
-
-    public void setLinkedCoordinates(int[] linkedCoordinates) {
-        this.linkedCoordinates = linkedCoordinates;
     }
 
     public String toString(){

@@ -43,7 +43,9 @@ public class PathFinder {
             }
         }
         schoolMap.resetParents();
-        return null;
+        ArrayList<Location> errorReturn = new ArrayList<>();
+        errorReturn.add(new VoidLocation());
+        return errorReturn;
     }
 
 
