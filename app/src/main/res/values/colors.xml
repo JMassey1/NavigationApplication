@@ -3,4 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="jagBlue">#022c72</color>
+    <color name="jagGreen">#33cc32</color>
+    <color name="white">#FFFFFF</color>
 </resources>

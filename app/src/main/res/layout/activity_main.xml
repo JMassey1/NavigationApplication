@@ -1,42 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:background="@color/jagBlue"
+    android:fitsSystemWindows="true"
+    android:gravity="center">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/buttonSubmit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/startingLoc" />
 
     <EditText
         android:id="@+id/startingLoc"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:background="@color/white"
         android:ems="10"
         android:hint="@string/routeStart"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.392" />
 
+    <Button
+        android:id="@+id/popUp"
+        android:layout_width="55dp"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:text="@string/popUpButton" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="55dp"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:text="@string/buttonSubmit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/startingLoc" />
+
     <EditText
         android:id="@+id/endLoc"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:background="@color/white"
         android:ems="10"
         android:hint="@string/routeEnd"
+        android:importantForAutofill="no"
         android:inputType="textPersonName" />
 
 </LinearLayout>

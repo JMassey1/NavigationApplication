@@ -17,5 +17,8 @@
     <string name="routeStart">"From:"</string>
     <string name="routeEnd">"To:"</string>
     <string name="buttonSubmit">"Submit"</string>
+    <string name="popUpButton">"POPUP"</string>
+    <string name="routePopUp">"THIS IS A TEST"</string>
+    <string name="routeCloseButton">"Close"</string>
 
 </resources>
