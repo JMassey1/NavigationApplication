@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     TextView route;
     Button submitButton, popUp, routeClose;
     Dialog dia;
+    PopupMenu popUpMenu;
 
     ArrayList<Location> path;
 
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dia = new Dialog(this);
+        //popUpMenu = new PopupMenu();
         startInput = findViewById(R.id.startingLoc);
         endInput = findViewById(R.id.endLoc);
         submitButton = findViewById(R.id.button);
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (path != null && path.size() > 0) {
                     showPopup(v, path);
+
                 }
             }
 
@@ -75,14 +79,6 @@ public class MainActivity extends AppCompatActivity {
         route = findViewById(R.id.routeText);
         routeClose = findViewById(R.id.routeCloseButton);
         dia.setContentView(R.layout.route_popup);
-        routeClose.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dia.dismiss();
-            }
-
-        });
         dia.show();
     }
 
