@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/jagBlue"
     android:fitsSystemWindows="true"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical"
+    >
 
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/photo_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp" />
 
     <EditText
         android:id="@+id/startingLoc"
@@ -52,4 +60,4 @@
 
 
 
-</LinearLayout>
+</RelativeLayout>

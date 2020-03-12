@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.github.chrisbanes.photoview.PhotoView;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     TextView route;
     Button submitButton, popUp, routeClose;
     Dialog dia;
+    PhotoView photoView;
     PopupMenu popUpMenu;
 
     ArrayList<Location> path;
@@ -32,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         dia = new Dialog(this);
         //popUpMenu = new PopupMenu();
+        photoView = findViewById(R.id.photo_view);
+        photoView.setImageResource(R.drawable.map);
         startInput = findViewById(R.id.startingLoc);
         endInput = findViewById(R.id.endLoc);
         submitButton = findViewById(R.id.button);
