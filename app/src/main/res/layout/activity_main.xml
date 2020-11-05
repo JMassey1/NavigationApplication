@@ -31,10 +31,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.392" />
 
+    <EditText
+        android:id="@+id/endLoc"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="643dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="@string/routeEnd"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName" />
+
     <Button
         android:id="@+id/popUp"
         android:layout_width="55dp"
         android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="65dp"
+        android:layout_marginBottom="642dp"
         android:background="@color/white"
         android:text="@string/popUpButton" />
 
@@ -42,21 +58,13 @@
         android:id="@+id/button"
         android:layout_width="55dp"
         android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="67dp"
         android:background="@color/white"
         android:text="@string/buttonSubmit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/startingLoc" />
-
-    <EditText
-        android:id="@+id/endLoc"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:ems="10"
-        android:hint="@string/routeEnd"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName" />
 
 
 
